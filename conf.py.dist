@@ -89,4 +89,4 @@ MANAGE_CHANGES = True
 #       False: 05
 #       True: 2014/05/05
 ################################################################################
-FULL_SET_NAME = False
+FULL_SET_NAME = True

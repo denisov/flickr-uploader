@@ -44,9 +44,12 @@ Refer to https://www.flickr.com/services/api/upload.api.html for what each of th
 upload arguments above correspond to for Flickr's API.
 
 ## Usage
-Place the file uploadr.py in any directory and run via ssh (execution privs required):
 
-$ ./uploadr.py
+    $ cp conf.py.dist conf.py
+
+Place the file uploader.py in any directory and run via ssh (execution privs required):
+
+    $ ./uploader.py
 
 It will crawl through all the files from the FILES_DIR directory and begin the upload process.
 
