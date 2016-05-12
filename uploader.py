@@ -701,13 +701,18 @@ class Uploadr:
         return json.loads(res)
 
     def run( self ):
-        """ run
-        """
+        #flick.displaySets()
+        if not os.access(FILES_DIR, os.R_OK):
+            print("The FILES_DIR directory '%s' in not readable" % FILES_DIR)
+            return
 
-        while ( True ):
-            self.upload()
-            print("Last check: " + str( time.asctime(time.localtime())))
-            time.sleep( SLEEP_TIME )
+        self.removeUselessSetsTable()
+        self.getFlickrSets()
+        self.convertRawFiles()
+        self.upload()
+        self.removeDeletedMedia()
+        self.createSets()
+        self.addTagsToUploadedPhotos()
 
     def createSets( self ):
         print('*****Creating Sets*****')
@@ -1009,16 +1014,13 @@ if __name__ == "__main__":
     flick.setupDB()
 
     if args.daemon:
-        flick.run()
+        # should we make auth in daemon mode???
+        while ( True ):
+            flick.run()
+            print("Last check: " + str( time.asctime(time.localtime())))
+            time.sleep( SLEEP_TIME )
     else:
         if ( not flick.checkToken() ):
             flick.authenticate()
-        #flick.displaySets()
-        flick.removeUselessSetsTable()
-        flick.getFlickrSets()
-        flick.convertRawFiles()
-        flick.upload()
-        flick.removeDeletedMedia()
-        flick.createSets()
-        flick.addTagsToUploadedPhotos()
+        flick.run()
 print("--------- End time: " + time.strftime("%c") + " ---------");
