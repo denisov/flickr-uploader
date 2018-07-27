@@ -53,6 +53,17 @@ Place the file uploader.py in any directory and run via ssh (execution privs req
 
 It will crawl through all the files from the FILES_DIR directory and begin the upload process.
 
+## Systemd unit setup
+
+    $ mkdir -p ~/.config/systemd/user/
+    $ cp flickr-uploader.service ~/.config/systemd/user/
+    $ systemctl --user daemon-reload
+
+    $ systemctl --user start flickr-uploader
+    $ systemctl --user enable flickr-uploader
+    $ systemctl --user status flickr-uploader
+    $ journalctl -f --user-unit flickr-uploader
+
 ## Q&A
 * Q: Who is this script designed for?
 * A: Those people comfortable with the command line that want to backup their media on Flickr in full resolution.
